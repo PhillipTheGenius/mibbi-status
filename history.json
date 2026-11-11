@@ -736,5 +736,46 @@
         "durationMs": 764
       }
     ]
+  },
+  {
+    "version": 1,
+    "checkedAt": "2026-11-11T23:06:43.050Z",
+    "checks": [
+      {
+        "id": "website",
+        "label": "Public website",
+        "ok": true,
+        "httpStatus": 200,
+        "durationMs": 1182
+      },
+      {
+        "id": "signin",
+        "label": "Sign-in page",
+        "ok": true,
+        "httpStatus": 200,
+        "durationMs": 1242
+      },
+      {
+        "id": "help",
+        "label": "Help centre",
+        "ok": true,
+        "httpStatus": 200,
+        "durationMs": 1150
+      },
+      {
+        "id": "security",
+        "label": "Security information",
+        "ok": true,
+        "httpStatus": 200,
+        "durationMs": 1152
+      },
+      {
+        "id": "project-guard",
+        "label": "Signed-out project access check",
+        "ok": true,
+        "httpStatus": 401,
+        "durationMs": 879
+      }
+    ]
   }
 ]
