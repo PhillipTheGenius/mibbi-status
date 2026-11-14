@@ -2,7 +2,7 @@ import {checks,parseReport,parseHistory,state} from './report.mjs';
 const base='https://raw.githubusercontent.com/PhillipTheGenius/mibbi-status/main/';
 const date=value=>new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'UTC'}).format(new Date(value))+' UTC';
 const label=value=>value==='ok'?'Checks passing':value==='issue'?'Needs attention':'Awaiting update';
-function indicator(element,value){element.dataset.state=value;element.textContent=value==='ok'?'âœ“':value==='issue'?'!':'â€“';}
+function indicator(element,value){element.dataset.state=value;element.textContent=value==='ok'?'✓':value==='issue'?'!':'–';}
 function render(report){
   const result=state(report);
   document.querySelector('#banner').dataset.state=result;
