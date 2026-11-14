@@ -1,4 +1,4 @@
-import {checks,parseReport,parseHistory,state} from './report.mjs';
+import {checks,parseReport,parseHistory,state} from './report.mjs?v=20261114';
 const base='https://raw.githubusercontent.com/PhillipTheGenius/mibbi-status/main/';
 const date=value=>new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'UTC'}).format(new Date(value))+' UTC';
 const label=value=>value==='ok'?'Checks passing':value==='issue'?'Needs attention':'Awaiting update';
@@ -22,7 +22,7 @@ function render(report){
     }
   }
 }
-async function read(file){const response=await fetch(base+file,{cache:'no-store',signal:AbortSignal.timeout(10000)});if(!response.ok)throw Error('Report unavailable');return response.json();}
+async function read(file){const response=await fetch(base+file+'?minute='+Math.floor(Date.now()/60000),{cache:'no-store',signal:AbortSignal.timeout(10000)});if(!response.ok)throw Error('Report unavailable');return response.json();}
 async function load(){
   const button=document.querySelector('#refresh');if(button.disabled)return;button.disabled=true;
   try{const report=parseReport(await read('status.json'));render(report);}catch{render(null);}
