@@ -1,41 +1,41 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-13T21:40:16.837Z",
+  "checkedAt": "2026-11-14T00:57:02.752Z",
   "checks": [
     {
       "id": "website",
       "label": "Public website",
       "ok": true,
       "httpStatus": 200,
-      "durationMs": 345
+      "durationMs": 756
     },
     {
       "id": "signin",
       "label": "Sign-in page",
       "ok": true,
       "httpStatus": 200,
-      "durationMs": 1280
+      "durationMs": 1578
     },
     {
       "id": "help",
       "label": "Help centre",
       "ok": true,
       "httpStatus": 200,
-      "durationMs": 1153
+      "durationMs": 576
     },
     {
       "id": "security",
       "label": "Security information",
       "ok": true,
       "httpStatus": 200,
-      "durationMs": 1134
+      "durationMs": 1450
     },
     {
       "id": "project-guard",
       "label": "Signed-out project access check",
       "ok": true,
       "httpStatus": 401,
-      "durationMs": 998
+      "durationMs": 976
     }
   ]
 }
