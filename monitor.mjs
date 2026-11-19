@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 export const targets=[
- {id:'website',label:'Public website',path:'/',expected:200},
+ {id:'website',label:'Public website',path:'/home',expected:200},
  {id:'signin',label:'Sign-in page',path:'/login',expected:200},
  {id:'help',label:'Help centre',path:'/help',expected:200},
  {id:'security',label:'Security information',path:'/security',expected:200},
