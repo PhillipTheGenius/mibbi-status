@@ -16,7 +16,8 @@ export async function probe(target, fetcher = fetch) {
 
   try {
     const response = await fetcher(site + target.path, {
-      redirect: 'error',
+      // Workers reject the Fetch API's 'error' mode. Read 3xx as failed checks.
+      redirect: 'manual',
       signal: AbortSignal.timeout(15000),
       headers: { 'User-Agent': 'Mibbi-Public-Status/1.0' },
     });

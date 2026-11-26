@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
-import worker from './status-worker.mjs';
+import worker, { probe, targets } from './status-worker.mjs';
 import { parseReport, state } from './report.mjs';
 
 test('scheduled probes publish ordered, retained receipts and the public endpoint is read-only', async t => {
@@ -17,7 +17,8 @@ test('scheduled probes publish ordered, retained receipts and the public endpoin
   });
   const env = { STATUS_DB: { prepare, batch: queries => queries.map(query => query.run()) } };
   const requested = [];
-  t.mock.method(globalThis, 'fetch', url => {
+  t.mock.method(globalThis, 'fetch', (url, options) => {
+    assert.equal(options.redirect, 'manual');
     requested.push(url);
     return new Response(null, { status: url.endsWith('/api/builder/projects') ? 401 : 200 });
   });
@@ -52,4 +53,14 @@ test('scheduled probes publish ordered, retained receipts and the public endpoin
   assert.equal(head.headers.get('Access-Control-Allow-Origin'), null);
   assert.equal(await head.text(), '');
   assert.equal(requested.length, 15);
+});
+
+test('a redirect is a failed probe and is never followed', async () => {
+  const result = await probe(targets[0], (url, options) => {
+    assert.equal(new URL(url).pathname, '/home');
+    assert.equal(options.redirect, 'manual');
+    return Response.redirect('https://example.test/unexpected', 302);
+  });
+  assert.equal(result.ok, false);
+  assert.equal(result.httpStatus, 302);
 });
